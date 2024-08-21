@@ -5,25 +5,18 @@ import TodoList from "./components/TodoList.js"
 
 //$target : Root라는 DOM
 export default function App({$target}) {
-    const initialState = [{
-        id: 1,
-        text: "할일 1",
-        checked: false,
-    },
-    {
-        id: 2,
-        text: "할일 2",
-        checked: false,
-    },
-    {
-        id: 3,
-        text: "할일 3",
-        checked: true,
+    const initialState = ['item1', 'item2', 'item3']
+
+    const onSubmit = (text) => {
+        const nextState = [...todoList.state, text]
+        todoList.setState(nextState)
     }
-]
 
-
-    new Header({$target})
-    new TodoForm({$target})
-    new TodoList({$target, initialState})
+    new Header({$target}) 
+    new TodoForm({
+        $target,
+        onSubmit
+    })
+    
+    const todoList = new TodoList({$target, initialState})
 }

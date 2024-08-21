@@ -1,9 +1,20 @@
 export default function TodoList({$target, initialState}){
-    const $div = document.createElement("div")
-    $div.innerHTML = `
+    const $list = document.createElement("div")
+    $target.appendChild($list)
+
+    this.state = initialState
+
+    this.setState = nextState => {
+        this.state = nextState
+        this.render()
+    }
+
+    this.render = () => {
+        $list.innerHTML = `
     <ul>
-        ${initialState.map(row => `<li>${row.text}</li>`).join([])}
+        ${this.state.map(row => `<li>${row}</li>`).join([])}
     </ul>
     `
-    $target.appendChild($div)
+    }
+    this.render() 
 }
