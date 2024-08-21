@@ -9,10 +9,23 @@ export default function TodoList({$target, initialState}){
         this.render()
     }
 
+    $list.addEventListener("click", (e) => {
+        if (e.target.classList.contains("del_btn")) {
+        const id = parseInt(e.target.getAttribut('data-id'))
+        onDelete(id)
+        }
+    })
+
     this.render = () => {
         $list.innerHTML = `
     <ul>
-        ${this.state.map(row => `<li>${row}</li>`).join([])}
+        ${this.state.map(row => `<li>
+            [${row.id}]
+            <span>${row.text}</span>
+            <button data-id="${row.id}" class = "del_btn>🗑️</button>
+            </li>`
+            )
+            .join([])}
     </ul>
     `
     }
